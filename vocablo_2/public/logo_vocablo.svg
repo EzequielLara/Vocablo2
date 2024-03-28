@@ -1,0 +1,98 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none" x="0px" y="0px" width="536px" height="185px" viewBox="0 0 536 185">
+<defs>
+<filter id="Filter_1" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+<feFlood flood-color="#CCCCCC" flood-opacity="1" in="SourceGraphic" result="result1"/>
+
+<feComposite in2="SourceGraphic" in="result1" operator="in" result="result2"/>
+
+<feGaussianBlur in="result2" stdDeviation="1.3333333333333333,1.3333333333333333" result="result3"/>
+
+<feOffset dx="-1.4984263736636483" dy="3.7087354182671497" in="result3" result="result4"/>
+
+<feComposite in2="result4" in="SourceGraphic" operator="over" result="result5"/>
+</filter>
+</defs>
+
+<g id="Capa_1">
+<g id="Capa_1" transform="matrix( 1, 0, 0, 1, 0,6.75) ">
+<g transform="matrix( 1.42791748046875, 0, 0, 1.42791748046875, 2.85,2.85) ">
+<clipPath id="Mask_Mask_1">
+<rect x="-2" y="-2" width="65.45" height="120.15" fill="#FFFFFF" stroke="none"/>
+</clipPath>
+
+<text clip-path="url(#Mask_Mask_1)" writing-mode="lr"><tspan x="0" y="93.5" baseline-shift="0%" font-family="Fredoka One" font-size="96" fill="#26798E" xml:space="preserve">v</tspan></text>
+</g>
+
+<g transform="matrix( 1.42791748046875, 0, 0, 1.42791748046875, 172.55,2.85) ">
+<clipPath id="Mask_Mask_2">
+<rect x="-2" y="-2" width="53.8" height="120.15" fill="#FFFFFF" stroke="none"/>
+</clipPath>
+
+<text clip-path="url(#Mask_Mask_2)" writing-mode="lr"><tspan x="0" y="93.5" baseline-shift="0%" font-family="Fredoka One" font-size="96" fill="#26798E" xml:space="preserve">c</tspan></text>
+</g>
+
+<g transform="matrix( 1.42791748046875, 0, 0, 1.42791748046875, 243.4,2.85) ">
+<clipPath id="Mask_Mask_3">
+<rect x="-2" y="-2" width="61.4" height="120.15" fill="#FFFFFF" stroke="none"/>
+</clipPath>
+
+<text clip-path="url(#Mask_Mask_3)" writing-mode="lr"><tspan x="0" y="93.5" baseline-shift="0%" font-family="Fredoka One" font-size="96" fill="#63CAA7" xml:space="preserve">a</tspan></text>
+</g>
+
+<g transform="matrix( 1.42791748046875, 0, 0, 1.42791748046875, 325.05,2.85) ">
+<clipPath id="Mask_Mask_4">
+<rect x="-2" y="-2" width="61.05" height="120.15" fill="#FFFFFF" stroke="none"/>
+</clipPath>
+
+<text clip-path="url(#Mask_Mask_4)" writing-mode="lr"><tspan x="0" y="93.5" baseline-shift="0%" font-family="Fredoka One" font-size="96" fill="#63CAA7" xml:space="preserve">b</tspan></text>
+</g>
+
+<g transform="matrix( 1.42791748046875, 0, 0, 1.42791748046875, 406.25,2.85) ">
+<clipPath id="Mask_Mask_5">
+<rect x="-2" y="-2" width="35.6" height="120.15" fill="#FFFFFF" stroke="none"/>
+</clipPath>
+
+<text clip-path="url(#Mask_Mask_5)" writing-mode="lr"><tspan x="0" y="93.5" baseline-shift="0%" font-family="Fredoka One" font-size="96" fill="#63CAA7" xml:space="preserve">l</tspan></text>
+</g>
+
+<g transform="matrix( 1.42791748046875, 0, 0, 1.42791748046875, 451.1,2.85) ">
+<clipPath id="Mask_Mask_6">
+<rect x="-2" y="-2" width="61.8" height="120.15" fill="#FFFFFF" stroke="none"/>
+</clipPath>
+
+<text clip-path="url(#Mask_Mask_6)" writing-mode="lr"><tspan x="0" y="93.5" baseline-shift="0%" font-family="Fredoka One" font-size="96" fill="#63CAA7" xml:space="preserve">o</tspan></text>
+</g>
+
+<g filter="url(#Filter_1)" transform="matrix( 1, 0, 0, 1, 0,0) ">
+<g id="Capa_1" transform="matrix( 1, 0, 0, 1, 66.7,0) ">
+<g id="Capa_1" transform="matrix( 1.462646484375, 0, 0, 1.458953857421875, 0,41.95) ">
+<g id="Capa_1" transform="matrix( 0.3660736083984375, 0.211334228515625, -0.211334228515625, 0.3660736083984375, 33.2,0) ">
+<g>
+<g>
+<g>
+<path fill="#FFC172" stroke="none" d="
+M 140 70
+Q 140 41 119.5 20.5 99 0 70 0 41 0 20.5 20.5 0 41 0 70 0 99 20.5 119.5 38.8 137.8 63.9 139.8
+L 52 157 74.9 157 74.9 139.85
+Q 100.75 138.25 119.5 119.5 140 99 140 70 Z"/>
+</g>
+</g>
+</g>
+</g>
+</g>
+
+<g id="Capa_1" transform="matrix( 1, 0, 0, 1, 20.75,0) ">
+<g transform="matrix( 1.42791748046875, 0, 0, 1.42791748046875, 2.85,2.85) ">
+<clipPath id="Mask_Mask_7">
+<rect x="-2" y="-2" width="61.8" height="120.15" fill="#FFFFFF" stroke="none"/>
+</clipPath>
+
+<text clip-path="url(#Mask_Mask_7)" writing-mode="lr"><tspan x="0" y="93.5" baseline-shift="0%" font-family="Fredoka One" font-size="96" fill="#26798E" xml:space="preserve">o</tspan></text>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</svg>

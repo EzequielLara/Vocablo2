@@ -1,0 +1,19 @@
+.boton_registro{
+    background-color: transparent;
+    margin: 1rem;
+    padding: 1rem;
+    text-align: left;
+    color: grey;
+    font-weight: bold;
+    text-decoration: none;
+    border: 3px solid #eaeaea;
+    border-radius: 10px;
+    transition: color 0.15s ease, border-color 0.15s ease;
+    max-width: 300px;  
+}
+.boton_registro:hover,
+.boton_registro:focus,
+.boton_registro:active {
+    color: #FFC172;
+    border-color:#FFC172;
+}   

@@ -1,0 +1,128 @@
+
+        .material_icons{
+          font-size:16px;
+        }
+        .datatable_container{
+          font-family:'Noto Sans', sans-serif;
+          background-color:white;
+          border-radius:3px;
+          color: #247c8c;
+          width: 75%;
+          margin:0 auto;
+          font-size:15px;
+        }
+        .datatable_container .header_tools{
+          border-bottom:solid 1px rgb(61,68,73);
+          padding: 12px;
+          display: flex;
+          align-items: baseline;
+        }
+        .datatable_container .header_tools .search{
+          width:35%;
+          margin-left:auto;
+          
+        }
+        .datatable_container .header_tools .search_input{
+          width: 100%;
+          padding:3px;
+          background-color: #fbcf8b;
+          display:block;
+          box-sizing: border-box;
+          border-radius: 3px;
+          border: solid 1px rgb(61,68,73);
+          color: white;
+          
+        }
+        .datatable_container .header_tools .tools ul{
+          margin:0;
+          padding:0;
+          display: flex;
+          justify-content: flex-start;
+          align-items: baseline;
+        }
+        .datatable_container .header_tools  .tools ul li{
+          display: inline-block;
+          margin: 0 2px;
+          align-items: baseline;
+        }
+        .datatable_container .footer_tools{
+          padding: 20px;
+          display: flex;
+          align-items: baseline;
+        }
+        .datatable_container .footer_tools .list_items{
+          width:50%;
+        }
+        .datatable_container .footer_tools .pages{
+          margin-left: auto;
+          margin-right: 0;
+          width: 50%;
+        }
+        .datatable_container .footer_tools .pages ul{
+          margin: 0;
+          padding: 0;
+          display: flex;
+          align-items: baseline;
+          justify-content: flex-end;
+        }
+        .datatable_container .footer_tools .pages ul li{
+          display: inline-block;
+          margin: 0 2px;
+        }
+        .datatable_container .footer_tools .pages ul li button,
+        .datatable_container .footer_tools .tools ul li button {
+          color: #247c8c;;
+          width:100%;
+          box-sizing: border-box;
+          border: 0;
+          border-radius: 3px;
+          background: transparent;
+          cursor: pointer;
+        }
+        .datatable_container .footer_tools .pages ul li button:hover,
+        .datatable_container .footer_tools .tools ul li button:hover {
+          background: #fbcf8b;
+          color: #3282b8;
+        } 
+        .datatable_container .footer_tools .pages ul li span.active{
+          background-color: #3282b8;
+          border-radius: 3px;
+        }
+        .datatable_container .footer_tools .pages ul li button,
+        .datatable_container .footer_tools .pages ul li span,
+        .datatable_container .header_tools .tools ul li button{
+          padding:2px 3px;
+        }
+        .datatable_container .datatable th{
+          font-weight: bolder;
+          text-align: left;
+          border-bottom: solid 7px red;
+         
+        }
+        .datatable_container .datatable td{
+          border-bottom: solid 7px green;
+        }
+        .datatable_container .datatable tbody tr:nth-child(even){
+          background-color: pink;
+        }
+        .datatable_container .datatable tbody tr:hover{
+          background-color: black;
+        }
+        .datatable_container .datatable tbody tr .available::after,
+        .datatable_container .datatable tbody tr .away::after,
+        .datatable_container .datatable tbody tr .offline::after{
+          display: inline-block;
+          vertical-align: middle;
+        }
+        .datatable_container .datatable tbody tr .available::after{
+          content: 'Available';
+          color: greenyellow;
+        }
+        .datatable_container .datatable tbody tr .away::after{
+          content: 'Away';
+          color: orange;
+        }
+        .datatable_container .datatable tbody tr .offline::after{
+          content: 'Offline';
+          color: tomato;
+        }
