@@ -37,3 +37,5 @@ next-env.d.ts
 
 # notas de seguimiento del proyecto
 /NOTAS.txt
+
+.vscode

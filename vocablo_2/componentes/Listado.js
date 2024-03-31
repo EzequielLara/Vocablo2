@@ -71,7 +71,7 @@ const Listado = ({ nuevoAlumno }) => {
     const fetchEliminarAlumno = async () => {
       try {
         const response = await fetch(
-          `/api/?usuarioEmail=${datos.email}&alumnoId=${alumnoid}`,
+          `/api/alumnos?usuarioEmail=${datos.email}&alumnoId=${alumnoid}`,
           {
             method: "DELETE",
           }
@@ -182,7 +182,7 @@ const Listado = ({ nuevoAlumno }) => {
             <Spinner />
           </Suspense>
         </div>
-      ) : datos.cursos == undefined || datos.cursos.length == 0 ? (
+      ) : datos.cursos == undefined && datos.alumnos.length == 0 || datos.cursos.length == 0 && datos.alumnos.length == 0 ? (
         <div
           className="alert alert-warning text-center w-75 m-auto mt-5"
           role="alert"
@@ -199,7 +199,7 @@ const Listado = ({ nuevoAlumno }) => {
         <div className="container w-auto mt-5">
           <div className="row justify-content-center align-items-center ">
             <div className="col-4 ">
-              <h4 className="colorTexto">Alumnos</h4>
+              <h4 className="colorTexto">Alumnos {alumnos.length > 0 ? alumnos.length : ''}</h4>
             </div>
             <div className="col-1 text-center">
               <span
@@ -227,6 +227,7 @@ const Listado = ({ nuevoAlumno }) => {
             {(datosPaginados.length > 0 && !seleccionBuscador) ||
               (seleccionBuscador && seleccionBuscador.nombre === "todos")
               ? datosPaginados.map((alumno) => (
+
                 <li
                   className="list-group-item m-2 shadow-sm rounded lihover"
                   key={alumno.id}

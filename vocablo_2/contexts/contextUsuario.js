@@ -13,6 +13,13 @@ function ContextUsuario({ children }) {
         setDatos(JSON.parse(storedData));
       }
     }
+    setDatos({
+      email: "admin@eze",
+      username: "Administrador",
+      loginAuth: false,
+      cursos: [],
+      alumnos: [],
+    })
   }, []);
 
   useEffect(() => {

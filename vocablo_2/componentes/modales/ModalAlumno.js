@@ -34,7 +34,6 @@ const ModalAlumno = ({
   }, []);
 
   useEffect(() => {
-    console.log("alumnoEditar: ", alumnoEditar);
     if (Object.keys(alumnoEditar).length > 0) {
       setNombreAlumno(alumnoEditar.nombre);
       setFechaCreacion(alumnoEditar.fecha_creacion);
@@ -72,11 +71,12 @@ const ModalAlumno = ({
         cursoAlumno,
         grupoAlumno,
       };
-      console.log("ALUMNO NUEVO: ", alumnoEditar);
+
       //Actualizar
       const alumnosActualizados = alumnos.map((alumnoState) =>
         alumnoState.id == alumnoEditar.id ? alumnoNuevo : alumnoState
       );
+      console.log('ACTUALIZADOS...: ', alumnosActualizados)
       setAlumnos(alumnosActualizados);
       setAlumnoEditar({});
       await axios
@@ -123,6 +123,7 @@ const ModalAlumno = ({
     resetearFormularioModal();
     ocultarModal();
   };
+
   return (
     <>
       <div className={style.modal}>
@@ -131,9 +132,8 @@ const ModalAlumno = ({
         </div>
         <form
           onSubmit={handleSubmit}
-          className={`${style.formulario} ${
-            animarModal ? style.animar : style.cerrar
-          }`}
+          className={`${style.formulario} ${animarModal ? style.animar : style.cerrar
+            }`}
         >
           <legend>
             {alumnoEditar.nombre ? "Editar Alumno" : "Nuevo Alumno"}
@@ -150,7 +150,8 @@ const ModalAlumno = ({
               placeholder="Nombre del Alumno"
               value={nombreAlumno}
               onChange={(e) => {
-                setNombreAlumno(e.target.value);
+                const formatearNombre = e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1);
+                setNombreAlumno(formatearNombre);
               }}
             />
           </div>
@@ -166,7 +167,8 @@ const ModalAlumno = ({
               placeholder="Apellidos del Alumno"
               value={apellidosAlumno}
               onChange={(e) => {
-                setApellidosAlumno(e.target.value);
+                const formatearApellidos = e.target.value.toLowerCase()
+                setApellidosAlumno(formatearApellidos);
               }}
             />
           </div>

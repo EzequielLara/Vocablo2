@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Usuario } from "../contexts/contextUsuario";
 import { useContext } from "react";
+import Spinner from "../componentes/compartidos/Spinner";
+import { Suspense } from "react";
 import Link from "next/link";
 
 import Swal from "sweetalert2";
@@ -29,6 +31,7 @@ const ListadoCursos = ({ nuevoCurso }) => {
 			setLoading(false);
 		};
 		fetchDatos();
+		// setLoading(false);
 	}, []);
 
 	const eliminarCurso = (cursoSeleccionado) => {
@@ -60,7 +63,7 @@ const ListadoCursos = ({ nuevoCurso }) => {
 			}
 		};
 		Swal.fire({
-			text: "¿Desea eliminar el curso completo?. " + " Recuerde que se eliminarán también todos los grupos",
+			text: "¿Desea eliminar el curso completo?. " + " Recuerde que se eliminarán también todos los grupos y los alumnos que estuviesen asociados quedarán sin grupo",
 			icon: "info",
 			showDenyButton: true,
 			showCancelButton: false,
@@ -91,19 +94,10 @@ const ListadoCursos = ({ nuevoCurso }) => {
 	return (
 		<>
 			{loading ? (
-				''
-			) : datos.cursos == undefined || datos.cursos.length == 0 ? (
-				<div
-					className="alert alert-warning text-center w-75 m-auto mt-5"
-					role="alert"
-				>
-					<p>
-						Antes de crear un listado de alumnos debes crear al menos un curso y un
-						grupo
-					</p>
-					<Link href={"/docentes/cursos"}>
-						<a>Ir a administrador de cursos</a>
-					</Link>
+				<div className="m-5">
+					<Suspense fallback={<div>Cargando...</div>}>
+						<Spinner />
+					</Suspense>
 				</div>
 			) : (
 				<div className="container w-auto mt-5">
@@ -125,6 +119,7 @@ const ListadoCursos = ({ nuevoCurso }) => {
 
 							</span>
 						</div>
+
 					</div>
 					<hr className="pb-4"></hr>
 					<ul className="list-group zindex ">
@@ -136,26 +131,42 @@ const ListadoCursos = ({ nuevoCurso }) => {
 							>
 								<div className="card-body">
 									<div className="row justify-content-center align-items-center ">
-										<div className="col-4  ps-4">
-											<h5 className="card-title">{curso.nombreCurso}</h5>
+										<div className="col-3 p-2 ps-4">
 											<p className="card-subtitle font-weight-light colorTexto">
-												{curso.nombreCurso}
+												Curso
 											</p>
+											<h5 className="card-title">{curso.nombreCurso}</h5>
 										</div>
-										<div className="col-4  text-center">
+										<div className="col-3  text-center">
 											<small className="card-subtitle text-capitalize">
 												{
 													curso.grupos.map((grupo, index) => (
-														<>
-															<p key={index}><span className="colorTexto"> Grupo </span>{grupo}</p>
-
-														</>
+														<div key={index} className="m-2">
+															<p className="card-title">
+																<span className="card-subtitle font-weight-light colorTexto"> Grupo </span>{grupo}
+															</p>
+														</div>
 													))
 												}
 											</small>
 
 										</div>
-										<div className="col-4">
+										<div className="col-3">
+
+											<button
+												className="border border-dark text-dark bg-transparent rounded-2 p-2 w-50 "
+												data-toggle="tooltip"
+												data-placement="top"
+												title="Añadir grupo nuevo"
+												onClick={() => {
+													nuevoCurso(curso);
+												}}
+											>
+												nuevo grupo
+
+											</button>
+										</div>
+										<div className="col-3">
 											<div className="m-auto text-end pe-4">
 												<button
 													type="button"
@@ -194,6 +205,9 @@ const ListadoCursos = ({ nuevoCurso }) => {
 			)
 			}
 			<style>{`
+						.iconoSize{
+							font-size: 20px !important;
+						}
          
             .lihover:hover{
               background-color: #247c8c5e;
@@ -207,6 +221,7 @@ const ListadoCursos = ({ nuevoCurso }) => {
             .colorIcono{
               color:orange;
               cursor: pointer;
+							font-size: 35px !important ;
             }
             .flecha:hover{
               border-transparent:none;

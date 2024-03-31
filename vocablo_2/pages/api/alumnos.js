@@ -25,7 +25,7 @@ export default async function alumnos(req, res) {
           email: req.query.email,
         });
         if (usuarios === undefined || usuarios === null) {
-          res.status(500).json({ error: "No existe el usuario" });
+          res.status(500).json({ error: "No se ha recibido ningún usuario en el servidor" });
         }
         const datosfiltrados = filtrarDatos(usuarios);
         res.status(200).json(datosfiltrados);
@@ -47,9 +47,9 @@ export default async function alumnos(req, res) {
         );
         break;
       case "PUT":
-        const { alumnoNuevo } = req.body;
+
         const index = req.body.usuario.alumnos.findIndex(
-          (elemento) => elemento.id === alumnoNuevo.id
+          (elemento) => elemento.id === req.body.alumnoNuevo.id
         );
 
         const resultadoActualizacion = await collection.updateOne(
@@ -57,16 +57,16 @@ export default async function alumnos(req, res) {
             email: req.body.usuario.email,
             alumnos: req.body.usuario.alumnos[index],
           },
-          { $set: { "alumnos.$": alumnoNuevo } }
+          { $set: { "alumnos.$": req.body.alumnoNuevo } }
         );
+
         res.status(200).json(resultadoActualizacion);
         break;
       case "DELETE":
         try {
-          const { alumnoId, usuarioEmail } = req.query;
           const resultadoBorrar = await collection.updateOne(
-            { email: usuarioEmail },
-            { $pull: { alumnos: { id: alumnoId } } }
+            { email: req.query.usuarioEmail },
+            { $pull: { alumnos: { id: req.query.alumnoId } } }
           );
           res.status(200).json(resultadoBorrar);
         } catch (e) {

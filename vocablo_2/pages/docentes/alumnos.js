@@ -50,7 +50,7 @@ const Alumnos = () => {
                 cambiarModal={cambiarModal}
                 animarModal={animarModal}
                 setAnimarModal={cambiarAnimarModal}
-                alumnos={alumnos}
+                alumnos={datos.alumnos}
                 alumnoEditar={alumnoEditar}
                 setAlumnoEditar={setAlumnoEditar}
                 setAlumnos={setAlumnos}

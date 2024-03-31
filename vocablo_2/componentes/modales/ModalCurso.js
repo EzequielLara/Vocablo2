@@ -15,21 +15,30 @@ const ModalCurso = ({
 	setCursoEditar,
 }) => {
 	const { datos, setDatos } = useContext(Usuario);
-	const [nombreGrupo, setNombreGrupo] = useState();
-	const [grupos, setGrupos] = useState();
-
-	const [gruposEditar, setGruposEditar] = useState();
+	const [nombreCurso, setNombreCurso] = useState('');
+	const [grupos, setGrupos] = useState([]);
+	//Formulario
 	const [nombreCursoEditar, setNombreCursoEditar] = useState();
+	const [nombreGrupo, setNombreGrupo] = useState();
 	const [error, setError] = useState(false);
+	const [cursoNuevo, setCursoNuevo] = useState(true)
+
+
+
 
 	useEffect(() => {
-		console.log("grupos", gruposEditar);
+
 		if (Object.keys(cursoEditar).length > 0) {
 			setNombreCursoEditar(cursoEditar.nombreCurso);
-			setGruposEditar(cursoEditar.grupos);
+			setGrupos(cursoEditar.grupos);
+			setCursoNuevo(false);
 
 		}
 	}, [])
+
+	useEffect(() => {
+		console.log(cursoEditar)
+	}, [cursoEditar])
 
 	const listadoGrupos = (curso) => {
 		const listado = datos.cursos.filter((cur) => cur.nombreCurso === curso);
@@ -37,6 +46,7 @@ const ModalCurso = ({
 			setGrupos(listado[0].grupos);
 		}
 	};
+
 
 	const ocultarModal = () => {
 		setTimeout(() => {
@@ -48,12 +58,13 @@ const ModalCurso = ({
 
 	const guardarCurso = async () => {
 		const usuario = datos;
-		if (cursoEditar) {
+		if (nombreCursoEditar) {
 			const cursoNuevo = {
-				nombreCurso,
+				id: cursoEditar.id,
+				nombreCurso: nombreCursoEditar,
 				grupos
 			};
-			console.log("curso NUEVO: ", cursoEditar);
+
 			//Actualizar
 			const cursosActualizados = cursos.map((cursoState) =>
 				cursoState.id == cursoEditar.id ? cursoNuevo : cursoState
@@ -68,11 +79,9 @@ const ModalCurso = ({
 		//Nuevo
 		const nuevo = {
 			id: generarId(),
-			fecha_creacion: generarFecha(),
-			nombre: nombrecurso,
-			apellidos: apellidoscurso,
-			curso: cursocurso,
-			grupo: grupocurso,
+			nombreCurso,
+			grupos
+
 		};
 
 		await axios
@@ -81,26 +90,23 @@ const ModalCurso = ({
 	};
 
 	const resetearFormularioModal = () => {
-		setNombrecurso("");
-		setApellidoscurso("");
-		setCursocurso("");
-		setGrupocurso("");
+		setNombreCurso('');
+		setGrupos([]);
+
 	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
 		if (
-			nombrecurso.trim() == "" ||
-			apellidoscurso.trim() == "" ||
-			cursocurso.trim() == "" ||
-			grupocurso.trim() == ""
+			// nombreCurso.trim() == "" ||
+			grupos.length == 0
 		) {
 			setError(true);
 			return;
 		}
 		setError(false);
-		guardarcurso();
+		guardarCurso();
 		resetearFormularioModal();
 		ocultarModal();
 	};
@@ -118,43 +124,128 @@ const ModalCurso = ({
 					<legend>
 						{cursoEditar.nombreCurso ? "Editar curso" : "Nuevo curso"}
 					</legend>
-					<div className="text-center mb-3">
-						<label className="pe-5" htmlFor="curso">
-							Curso:
-						</label>
-						<input
-							className="w-50 p-2 estiloInput"
-							id="nombre"
-							name="nombre"
-							type="text"
-							placeholder="Nombre del curso"
-							value={nombreCursoEditar}
-							onChange={(e) => {
-								setNombreCurso(e.target.value);
-							}}
-						/>
-					</div>
-					{cursoEditar.grupos.map(grup => (
-						<div className="text-center mb-2">
-							<label className="pe-5" htmlFor="grupo">
-								grupo:
-							</label>
 
+					{cursoNuevo ? (
+						<>
+							<div className="text-center mb-3">
 
-							<input
-								className="w-50 p-2 estiloInput"
-								id="nombreGrupo"
-								name="nombreGrupo"
-								type="text"
-								placeholder="Apellidos del curso"
-								value={grup}
-								onChange={(e) => {
-									setNombreGrupo(e.target.value);
-								}}
-							/>
+								<input
+									className="w-50 p-2 estiloInput"
+									id="nombre"
+									name="nombre"
+									type="text"
+									placeholder="Nombre del curso"
+									value={cursoEditar.nombreCurso}
+									onChange={(e) => {
+										const nombreFormateado = e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1);
+										setNombreCurso(nombreFormateado);
+									}}
+								/>
+							</div>
+							<div className="text-center mb-3">
+								<input
+									className="w-50  mt-3 p-2 estiloInput"
+									id="grupo"
+									name="grupo"
+									type="text"
+									placeholder="Nombre del grupo"
+									value={nombreGrupo}
 
-						</div>
-					))}
+									onChange={(e) => {
+										const nombreFormateado = e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1);
+										setNombreGrupo(nombreFormateado);
+									}}
+								/>
+								<p className="colorIcono mb-2">Añadir uno o más grupos</p>
+
+							</div>
+							{nombreGrupo ? (
+								<span
+									className="w-100 material-symbols-outlined colorIcono mb-5 text-center sizeIcono"
+									data-toggle="tooltip"
+									data-placement="top"
+									title="Crear curso nuevo"
+									onClick={() => {
+										setGrupos([...grupos, nombreGrupo]);
+										setNombreGrupo('');
+									}}
+								>
+									add_circle
+
+								</span>
+							) : ('')}
+
+							<h5 className=" text-center lista mb-5">
+								{grupos.length == 0 ? '' : ("*GRUPOS AÑADIDOS*:")}
+								{grupos.map((grup, index) => (
+
+									<span
+										key={index}
+										className="w-50 p-2 uno"
+
+									>{grup},
+									</span>
+
+								))}
+							</h5>
+						</>
+					) : (
+						<>
+							<div className="text-center mb-3">
+
+								<input
+									className="w-50 p-2 estiloInput"
+									id="nombre"
+									name="nombre"
+									type="text"
+									placeholder={cursoEditar.nombreCurso}
+									onBlur={(e) => {
+										const nombreFormateado = e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1);
+										setCursoEditar({
+											nombreCurso: nombreFormateado,
+											grupos: cursoEditar.grupos
+										})
+										console.log('nombreFormateado: ', nombreFormateado)
+										setNombreCursoEditar(nombreFormateado)
+									}}
+								/>
+							</div>
+							<h5 className=" text-center lista mb-5">
+								{cursoEditar.grupos.map((grup, index) => (
+
+									<div key={index} className="text-center mb-3">
+										<input
+											className="w-50 p-2 estiloInput"
+											id="grupo"
+											name="grupo"
+											type="text"
+											placeholder={grup}
+											onBlur={(e) => {
+
+												const nombreFormateado = e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1);
+												const indice1 = index;
+												const arrayModificado = cursoEditar.grupos.map((elemento, indice) => {
+													if (indice === indice1) {
+														return nombreFormateado; // Sustituye el valor
+													}
+													return elemento; // Conserva el valor original si no coincide
+												});
+												const sinVacios = arrayModificado.filter((e) => e !== "")
+												setCursoEditar({
+													id: cursoEditar.id,
+													nombreCurso: cursoEditar.nombreCurso,
+													grupos: sinVacios
+												})
+												setGrupos(sinVacios)
+
+											}}
+										/>
+									</div>
+
+								))}
+							</h5>
+						</>
+					)}
 					{error && <h5 className="uno">*No se admiten campos vacíos</h5>}
 					<input
 						id="boton"
@@ -166,12 +257,19 @@ const ModalCurso = ({
 			</div>
 			<style>{`
 				.uno{
-					color:tomato;
+					color:white;
 				}
 				.estiloInput{
 					background-color:transparent;
 					border: 2px solid white;
 					color:white;
+					font-size:1.2rem;
+				}
+				.lista{
+					
+					background-color:transparent;
+					border: 0px;
+					color:tomato;
 					font-size:1.2rem;
 				}
 				.estiloSelect{
@@ -181,7 +279,32 @@ const ModalCurso = ({
 					font-size:1.2rem;
 					text-align:center;
 				}
+				 .colorIcono{
+              		color:white;
+              		cursor: pointer;
+				 }
+				 .sizeIcono{
+					text-align:center;
+					font-size: 35px !important ;
+					vertical-align: middle;
+				 }
+				 .read input{
+					 cursor: none;
+					  pointer-events: none;
+					  user-select: none;
+				 }
+									
+            
 		`}</style>
+			<link
+				href="https://fonts.googleapis.com/icon?family=Material+Icons"
+				rel="stylesheet"
+			></link>
+			<link
+				href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap"
+				rel="stylesheet"
+			></link>
+			<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 		</>
 	);
 };
