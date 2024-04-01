@@ -100,7 +100,7 @@ const ListadoCursos = ({ nuevoCurso }) => {
 					</Suspense>
 				</div>
 			) : (
-				<div className="container w-auto mt-5">
+				<div className="container w-auto mt-5 mb-5 pb-5">
 					<div className="row justify-content-center align-items-center ">
 						<div className="col-4 ">
 							<h4 className="colorTexto">Administrador de cursos</h4>
@@ -131,13 +131,13 @@ const ListadoCursos = ({ nuevoCurso }) => {
 							>
 								<div className="card-body">
 									<div className="row justify-content-center align-items-center ">
-										<div className="col-3 p-2 ps-4">
+										<div className="col-4 p-2 ps-4">
 											<p className="card-subtitle font-weight-light colorTexto">
 												Curso
 											</p>
 											<h5 className="card-title">{curso.nombreCurso}</h5>
 										</div>
-										<div className="col-3  text-center">
+										<div className="col-4  text-center">
 											<small className="card-subtitle text-capitalize">
 												{
 													curso.grupos.map((grupo, index) => (
@@ -151,22 +151,7 @@ const ListadoCursos = ({ nuevoCurso }) => {
 											</small>
 
 										</div>
-										<div className="col-3">
-
-											<button
-												className="border border-dark text-dark bg-transparent rounded-2 p-2 w-50 "
-												data-toggle="tooltip"
-												data-placement="top"
-												title="Añadir grupo nuevo"
-												onClick={() => {
-													nuevoCurso(curso);
-												}}
-											>
-												nuevo grupo
-
-											</button>
-										</div>
-										<div className="col-3">
+										<div className="col-4">
 											<div className="m-auto text-end pe-4">
 												<button
 													type="button"

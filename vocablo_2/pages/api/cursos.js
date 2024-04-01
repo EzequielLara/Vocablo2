@@ -34,7 +34,7 @@ export default async function cursos(req, res) {
             case "POST":
                 // Agregar el nuevo alumno al array de alumnos del usuario específico
                 const cursoIntroducido = await collection.updateOne(
-                    { email: req.body.usuario.email },
+                    { email: req.body.usuarioEmail },
                     { $push: { cursos: req.body.nuevo } },
                     (err) => {
                         if (err) {
@@ -47,15 +47,17 @@ export default async function cursos(req, res) {
                 res.status(200).json(cursoIntroducido)
                 break;
             case "PUT":
-                console.log('ha llegado al put: ', req.body)
-                const index = req.body.usuario.alumnos.findIndex(
-                    (elemento) => elemento.curso === req.body.cursoNuevo.nombreCurso
+
+
+                const index = req.body.usuarioCursos.findIndex(
+                    (elemento) => elemento.id === req.body.cursoNuevo.id
                 );
 
+                console.log('index extraido: ', req.body);
                 const resultadoActualizacion = await collection.updateOne(
                     {
-                        email: req.body.usuario.email,
-                        alumnos: req.body.usuario.alumnos[index],
+                        email: req.body.usuarioEmail,
+                        cursos: req.body.usuarioCursos[index],
                     },
                     { $set: { "cursos.$": req.body.cursoNuevo } }
                 );

@@ -57,22 +57,26 @@ const ModalCurso = ({
 	};
 
 	const guardarCurso = async () => {
-		const usuario = datos;
+		const usuarioEmail = datos.email;
+		const usuarioCursos = datos.cursos;
 		if (nombreCursoEditar) {
+			const filtroGrupos = grupos.filter((e) => e.trim() !== "");
+			console.log('filtrando los grupos ', filtroGrupos)
 			const cursoNuevo = {
 				id: cursoEditar.id,
 				nombreCurso: nombreCursoEditar,
-				grupos
+				grupos: filtroGrupos
 			};
 
 			//Actualizar
 			const cursosActualizados = cursos.map((cursoState) =>
 				cursoState.id == cursoEditar.id ? cursoNuevo : cursoState
 			);
-			setCursos(cursosActualizados);
+			const cursosFiltrados = cursosActualizados.filter((c) => c.nombreCurso !== '');
+			setCursos(cursosFiltrados);
 			setCursoEditar({});
 			await axios
-				.put("/api/cursos", { cursoNuevo, usuario })
+				.put("/api/cursos", { cursoNuevo, usuarioCursos, usuarioEmail })
 				.catch((e) => console.log(e.response.data.error));
 			return;
 		}
@@ -85,7 +89,7 @@ const ModalCurso = ({
 		};
 
 		await axios
-			.post("/api/cursos", { nuevo, usuario })
+			.post("/api/cursos", { nuevo, usuarioEmail })
 			.catch((e) => console.log(e.response.data.error));
 	};
 
@@ -107,8 +111,8 @@ const ModalCurso = ({
 		}
 		setError(false);
 		guardarCurso();
-		resetearFormularioModal();
 		ocultarModal();
+		resetearFormularioModal();
 	};
 	return (
 		<>
@@ -176,7 +180,7 @@ const ModalCurso = ({
 							) : ('')}
 
 							<h5 className=" text-center lista mb-5">
-								{grupos.length == 0 ? '' : ("*GRUPOS AÑADIDOS*:")}
+								{grupos.length == 0 ? '' : ("* GRUPOS AÑADIDOS:")}
 								{grupos.map((grup, index) => (
 
 									<span
@@ -202,6 +206,7 @@ const ModalCurso = ({
 									onBlur={(e) => {
 										const nombreFormateado = e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1);
 										setCursoEditar({
+											id: cursoEditar.id,
 											nombreCurso: nombreFormateado,
 											grupos: cursoEditar.grupos
 										})
@@ -210,40 +215,71 @@ const ModalCurso = ({
 									}}
 								/>
 							</div>
-							<h5 className=" text-center lista mb-5">
-								{cursoEditar.grupos.map((grup, index) => (
+							<h5 className=" text-center lista mb-3">
+								{grupos.map((grup, index) => (
+									<>
+										<div key={index} className="text-center mb-2">
+											<input
+												className="w-50 p-2 estiloInput"
+												id="grupo"
+												name="grupo"
+												type="text"
+												placeholder={grup}
+												onBlur={(e) => {
 
-									<div key={index} className="text-center mb-3">
-										<input
-											className="w-50 p-2 estiloInput"
-											id="grupo"
-											name="grupo"
-											type="text"
-											placeholder={grup}
-											onBlur={(e) => {
+													const nombreFormateado = e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1);
+													const indice1 = index;
+													const arrayModificado = cursoEditar.grupos.map((elemento, indice) => {
+														if (indice === indice1) {
+															return nombreFormateado; // Sustituye el valor
+														}
+														return elemento; // Conserva el valor original si no coincide
+													});
+													const sinVacios = arrayModificado.filter((e) => e.trim() !== "")
+													setCursoEditar({
+														id: cursoEditar.id,
+														nombreCurso: cursoEditar.nombreCurso,
+														grupos: sinVacios
+													})
+													setGrupos(sinVacios)
 
-												const nombreFormateado = e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1);
-												const indice1 = index;
-												const arrayModificado = cursoEditar.grupos.map((elemento, indice) => {
-													if (indice === indice1) {
-														return nombreFormateado; // Sustituye el valor
-													}
-													return elemento; // Conserva el valor original si no coincide
-												});
-												const sinVacios = arrayModificado.filter((e) => e !== "")
-												setCursoEditar({
-													id: cursoEditar.id,
-													nombreCurso: cursoEditar.nombreCurso,
-													grupos: sinVacios
-												})
-												setGrupos(sinVacios)
+												}}
+											/>
+										</div>
 
-											}}
-										/>
-									</div>
-
+									</>
 								))}
 							</h5>
+							<div className="text-center mb-2">
+								<input
+									className="w-50  mt-3 p-2 estiloInput"
+									id="grupo"
+									name="grupo"
+									type="text"
+									placeholder="Nombre del grupo nuevo"
+									value={nombreGrupo}
+
+									onChange={(e) => {
+										const nombreFormateado = e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1);
+										setNombreGrupo(nombreFormateado);
+									}}
+								/>
+								<p className="colorIcono mb-2">Añadir grupos nuevos</p>
+
+							</div>
+							<span
+								className="w-100 material-symbols-outlined colorIcono mb-3 text-center sizeIcono"
+								data-toggle="tooltip"
+								data-placement="top"
+								title="Crear curso nuevo"
+								onClick={() => {
+									setGrupos([...grupos, nombreGrupo]);
+									setNombreGrupo('');
+								}}
+							>
+								add_circle
+
+							</span>
 						</>
 					)}
 					{error && <h5 className="uno">*No se admiten campos vacíos</h5>}
