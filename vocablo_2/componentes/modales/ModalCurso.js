@@ -194,7 +194,7 @@ const ModalCurso = ({
 							<div className="text-center mb-3">
 
 								<input
-									className="w-50 p-2 estiloInput"
+									className="w-50 p-1 ps-3estiloInput"
 									id="nombre"
 									name="nombre"
 									type="text"
@@ -216,7 +216,7 @@ const ModalCurso = ({
 									<>
 										<div key={index} className="text-center mb-2">
 											<input
-												className="w-50 p-2 estiloInput"
+												className="w-50 p-1 ps-3 estiloInput"
 												id="grupo"
 												name="grupo"
 												type="text"
@@ -248,7 +248,7 @@ const ModalCurso = ({
 							</h5>
 							<div className="text-center mb-2">
 								<input
-									className="w-50  mt-3 p-2 estiloInput"
+									className="w-50  mt-3 p-1 ps-3 estiloInput"
 									id="grupo"
 									name="grupo"
 									type="text"
@@ -260,11 +260,11 @@ const ModalCurso = ({
 										setNombreGrupo(nombreFormateado);
 									}}
 								/>
-								<p className="colorIcono mb-2">Añadir grupos nuevos</p>
+								<p className="colorIcono text-muted mb-2">Añadir grupos nuevos</p>
 
 							</div>
 							<span
-								className="w-100 material-symbols-outlined colorIcono mb-3 text-center sizeIcono"
+								className="w-100 material-symbols-outlined colorIcono mb-2 text-center sizeIcono"
 								data-toggle="tooltip"
 								data-placement="top"
 								title="Crear curso nuevo"
@@ -280,6 +280,7 @@ const ModalCurso = ({
 					)}
 					{error && <h5 className="uno">*No se admiten campos vacíos</h5>}
 					<input
+						className="boton p-2 ps-3 w-50 mx-auto"
 						id="boton"
 						name="boton"
 						type="submit"
@@ -288,6 +289,9 @@ const ModalCurso = ({
 				</form>
 			</div>
 			<style>{`
+				.boton{
+					font-size:1rem;
+				}
 				.uno{
 					color:white;
 				}
@@ -295,7 +299,7 @@ const ModalCurso = ({
 					background-color:transparent;
 					border: 2px solid white;
 					color:white;
-					font-size:1.2rem;
+					font-size:1rem;
 				}
 				.lista{
 					
@@ -317,7 +321,7 @@ const ModalCurso = ({
 				 }
 				 .sizeIcono{
 					text-align:center;
-					font-size: 35px !important ;
+					font-size: 30px !important ;
 					vertical-align: middle;
 				 }
 				 .read input{
