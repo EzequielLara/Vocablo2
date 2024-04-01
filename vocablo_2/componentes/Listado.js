@@ -48,8 +48,10 @@ const Listado = ({ nuevoAlumno }) => {
       );
       setNumTotalPaginas(totalPaginas);
       setLoading(false);
+
     };
     fetchDatos();
+    console.log('daaatttiiis: ', datos)
   }, []);
 
   useEffect(() => {
@@ -182,15 +184,17 @@ const Listado = ({ nuevoAlumno }) => {
             <Spinner />
           </Suspense>
         </div>
-      ) : datos.cursos == undefined && datos.alumnos.length == 0 || datos.cursos.length == 0 && datos.alumnos.length == 0 ? (
+      ) : datos.cursos == undefined && datos.alumnos == undefined || datos.cursos.length === 0 ? (
         <div
           className="alert alert-warning text-center w-75 m-auto mt-5"
           role="alert"
         >
+
           <p>
             Antes de crear un listado de alumnos debes crear al menos un curso y
             grupo
           </p>
+
           <Link href={"/docentes/cursos"}>
             <a>Crear Curso</a>
           </Link>

@@ -14,8 +14,8 @@ function ContextUsuario({ children }) {
       }
     }
     setDatos({
-      email: "admin@eze",
-      username: "Administrador",
+      email: "",
+      username: "",
       loginAuth: false,
       cursos: [],
       alumnos: [],

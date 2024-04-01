@@ -53,7 +53,7 @@ export default async function cursos(req, res) {
                     (elemento) => elemento.id === req.body.cursoNuevo.id
                 );
 
-                console.log('index extraido: ', req.body);
+
                 const resultadoActualizacion = await collection.updateOne(
                     {
                         email: req.body.usuarioEmail,

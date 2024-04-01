@@ -12,7 +12,7 @@ import { useContext } from "react";
 
 const Home = ({ username, email, loginAuth }) => {
   const { datos, setDatos } = useContext(Usuario);
-  console.log(username, email, loginAuth);
+
 
   const comprobacion = async () => {
     if (loginAuth) {

@@ -36,9 +36,6 @@ const ModalCurso = ({
 		}
 	}, [])
 
-	useEffect(() => {
-		console.log(cursoEditar)
-	}, [cursoEditar])
 
 	const listadoGrupos = (curso) => {
 		const listado = datos.cursos.filter((cur) => cur.nombreCurso === curso);
@@ -61,7 +58,6 @@ const ModalCurso = ({
 		const usuarioCursos = datos.cursos;
 		if (nombreCursoEditar) {
 			const filtroGrupos = grupos.filter((e) => e.trim() !== "");
-			console.log('filtrando los grupos ', filtroGrupos)
 			const cursoNuevo = {
 				id: cursoEditar.id,
 				nombreCurso: nombreCursoEditar,
@@ -210,7 +206,7 @@ const ModalCurso = ({
 											nombreCurso: nombreFormateado,
 											grupos: cursoEditar.grupos
 										})
-										console.log('nombreFormateado: ', nombreFormateado)
+
 										setNombreCursoEditar(nombreFormateado)
 									}}
 								/>

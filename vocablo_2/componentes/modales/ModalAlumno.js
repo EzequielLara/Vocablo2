@@ -66,17 +66,17 @@ const ModalAlumno = ({
         id: alumnoEditar.id,
         fecha_creacion: fechaCreacion,
         fecha_modificacion: generarFecha(),
-        nombreAlumno,
-        apellidosAlumno,
-        cursoAlumno,
-        grupoAlumno,
+        nombre: nombreAlumno,
+        apellidos: apellidosAlumno,
+        curso: cursoAlumno,
+        grupo: grupoAlumno,
       };
 
       //Actualizar
       const alumnosActualizados = alumnos.map((alumnoState) =>
         alumnoState.id == alumnoEditar.id ? alumnoNuevo : alumnoState
       );
-      console.log('ACTUALIZADOS...: ', alumnosActualizados)
+
       setAlumnos(alumnosActualizados);
       setAlumnoEditar({});
       await axios

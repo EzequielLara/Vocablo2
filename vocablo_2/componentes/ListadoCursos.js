@@ -51,7 +51,7 @@ const ListadoCursos = ({ nuevoCurso }) => {
 						(curso) => curso.nombreCurso !== cursoSeleccionado.nombreCurso
 					);
 					setCursos(updatedCursos);
-					console.log("cursos para pintar", cursos)
+
 				} else {
 					console.error(
 						"Error al realizar la solicitud de borrado:",
