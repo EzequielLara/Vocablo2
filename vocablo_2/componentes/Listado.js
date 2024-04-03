@@ -51,7 +51,7 @@ const Listado = ({ nuevoAlumno }) => {
 
     };
     fetchDatos();
-    console.log('daaatttiiis: ', datos)
+
   }, []);
 
   useEffect(() => {
@@ -251,15 +251,17 @@ const Listado = ({ nuevoAlumno }) => {
                       </div>
                       <div className="col-4">
                         <div className="m-auto text-end pe-4">
-                          <button
-                            type="button"
-                            className="border-0 bg-transparent text-secondary material-icons me-2 iconhover"
-                            data-toggle="tooltip"
-                            data-placement="top"
-                            title="Ver mas información"
-                          >
-                            info
-                          </button>
+                          <Link href={`/docentes/alumnos/${alumno.id}`}>
+                            <button
+                              type="button"
+                              className="border-0 bg-transparent text-secondary material-icons me-2 iconhover"
+                              data-toggle="tooltip"
+                              data-placement="top"
+                              title="Ver mas información"
+                            >
+                              info
+                            </button>
+                          </Link>
                           <button
                             type="button"
                             className="border-0 bg-transparent text-muted material-icons me-2 iconhover"
@@ -427,7 +429,7 @@ const Listado = ({ nuevoAlumno }) => {
               </div>
             </div>
           )}
-        </div>
+        </div >
       )}
       <style>{`
          

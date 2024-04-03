@@ -96,7 +96,7 @@ const ModalAlumno = ({
 
     await axios
       .post("/api/alumnos", { nuevo, usuario })
-      .catch((e) => console.log(e.response.data.error));
+      .catch((e) => console.log(e.response));
   };
 
   const resetearFormularioModal = () => {
