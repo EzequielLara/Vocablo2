@@ -11,7 +11,7 @@ import withReactContent from "sweetalert2-react-content";
 
 const MySwal = withReactContent(Swal);
 
-const Listado = ({ nuevoAlumno }) => {
+const Listado = ({ nuevoAlumno, cambios, setCambios }) => {
   const { datos, setDatos } = useContext(Usuario);
 
   const [alumnos, setAlumnos] = useState([]);
@@ -24,34 +24,33 @@ const Listado = ({ nuevoAlumno }) => {
   const [datosPaginados, setDatosPaginados] = useState([]);
   const [seleccionBuscador, setSeleccionBuscador] = useState(null);
 
-  const setSeleccion = (e) => {
-    setSeleccionBuscador(e);
-  };
-  const cambiarPrimeraPagina = () => {
-    setPaginaActual(1);
-  };
 
   useEffect(() => {
     setLoading(true);
   }, []);
 
   useEffect(() => {
-    const fetchDatos = async () => {
-      const response = await fetch(`/api/alumnos?email=${datos.email}`, {
-        method: "GET",
-      });
-      const data = await response.json();
-      setDatos(data);
-      setAlumnos(data.alumnos);
+    if (cambios) {
+
+      fetchDatos();
+    }
+  }, [cambios]);
+
+  useEffect(() => {
+    if (datos.alumnos) {
+
+      setDatos(datos);
+      setAlumnos(datos.alumnos);
+
       const totalPaginas = Math.ceil(
-        data.alumnos.length / numElementosPorPagina
+        datos.alumnos.length / numElementosPorPagina
       );
       setNumTotalPaginas(totalPaginas);
       setLoading(false);
+    } else {
 
-    };
-    fetchDatos();
-
+      fetchDatos();
+    }
   }, []);
 
   useEffect(() => {
@@ -60,6 +59,28 @@ const Listado = ({ nuevoAlumno }) => {
     const datosPaginados = alumnos.slice(inicio, fin);
     setDatosPaginados(datosPaginados);
   }, [paginaActual, numElementosPorPagina, alumnos]);
+
+  const setSeleccion = (e) => {
+    setSeleccionBuscador(e);
+  };
+  const cambiarPrimeraPagina = () => {
+    setPaginaActual(1);
+  };
+
+  const fetchDatos = async () => {
+    const response = await fetch(`/api/alumnos?email=${datos.email}`, {
+      method: "GET",
+    });
+    const data = await response.json();
+    setDatos(data);
+    setAlumnos(data.alumnos);
+    const totalPaginas = Math.ceil(
+      data.alumnos.length / numElementosPorPagina
+    );
+    setNumTotalPaginas(totalPaginas);
+    setLoading(false);
+
+  };
 
   const cambiarPagina = (direccion) => {
     if (direccion === "siguiente") {
@@ -85,6 +106,7 @@ const Listado = ({ nuevoAlumno }) => {
             (alumno) => alumno.id !== alumnoid
           );
           setAlumnos(updatedAlumnos);
+          setCambios(true);
         } else {
           console.error(
             "Error al realizar la solicitud de borrado:",

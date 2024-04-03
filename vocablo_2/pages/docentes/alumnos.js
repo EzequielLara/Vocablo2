@@ -18,10 +18,12 @@ const Alumnos = () => {
   const [animarModal, setAnimarModal] = useState(true);
   const [alumnos, setAlumnos] = useState([]);
   const [alumnoEditar, setAlumnoEditar] = useState({});
+  const [cambios, setCambios] = useState(false);
 
   const nuevoAlumno = (alumno) => {
     setAlumnoEditar(alumno);
     setModal(!modal);
+    setCambios(true);
   };
 
 
@@ -43,7 +45,7 @@ const Alumnos = () => {
           <main>
             {modal ? (
               <>
-                <Listado nuevoAlumno={nuevoAlumno}></Listado>
+                <Listado cambios={cambios} setCambios={setCambios} nuevoAlumno={nuevoAlumno}></Listado>
               </>
             ) : (
               <ModalAlumno

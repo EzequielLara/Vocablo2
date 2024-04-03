@@ -13,13 +13,6 @@ function ContextUsuario({ children }) {
         setDatos(JSON.parse(storedData));
       }
     }
-    // setDatos({
-    //   email: "",
-    //   username: "",
-    //   loginAuth: false,
-    //   cursos: [],
-    //   alumnos: [],
-    // })
   }, []);
 
   useEffect(() => {

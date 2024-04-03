@@ -13,10 +13,12 @@ const Grupos = () => {
   const [animarModal, setAnimarModal] = useState(true);
   const [cursos, setCursos] = useState([]);
   const [cursoEditar, setCursoEditar] = useState({});
+  const [cambios, setCambios] = useState(false)
 
   const nuevoCurso = (curso) => {
     setCursoEditar(curso);
     setModal(!modal);
+    setCambios(true);
   };
 
   const cambiarModal = () => {
@@ -36,7 +38,7 @@ const Grupos = () => {
           ></Navegacion>
           <main>{modal ? (
             <>
-              <ListadoCursos nuevoCurso={nuevoCurso}></ListadoCursos>
+              <ListadoCursos cambios={cambios} setCambios={setCambios} nuevoCurso={nuevoCurso}></ListadoCursos>
             </>
           ) : (
             <ModalCurso

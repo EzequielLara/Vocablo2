@@ -10,29 +10,40 @@ import withReactContent from "sweetalert2-react-content";
 
 const MySwal = withReactContent(Swal);
 
-const ListadoCursos = ({ nuevoCurso }) => {
+const ListadoCursos = ({ nuevoCurso, cambios, setCambios }) => {
 	const { datos, setDatos } = useContext(Usuario);
-
 	const [cursos, setCursos] = useState([]);
 	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
 		setLoading(true);
+		if (datos.cursos) {
+
+			setDatos(datos);
+			setCursos(datos.cursos);
+			setLoading(false);
+		} else {
+			fetchDatos()
+		}
+
 	}, []);
 
 	useEffect(() => {
-		const fetchDatos = async () => {
-			const response = await fetch(`/api/alumnos?email=${datos.email}`, {
-				method: "GET",
-			});
-			const data = await response.json();
-			setDatos(data);
-			setCursos(data.cursos);
-			setLoading(false);
-		};
-		fetchDatos();
-		// setLoading(false);
-	}, []);
+		if (cambios) {
+
+			fetchDatos();
+		}
+	}, [cambios]);
+
+	const fetchDatos = async () => {
+		const response = await fetch(`/api/alumnos?email=${datos.email}`, {
+			method: "GET",
+		});
+		const data = await response.json();
+		setDatos(data);
+		setCursos(data.cursos);
+		setLoading(false);
+	};
 
 	const eliminarCurso = (cursoSeleccionado) => {
 		const fetchEliminarCurso = async () => {
@@ -51,6 +62,7 @@ const ListadoCursos = ({ nuevoCurso }) => {
 						(curso) => curso.nombreCurso !== cursoSeleccionado.nombreCurso
 					);
 					setCursos(updatedCursos);
+					setCambios(true);
 
 				} else {
 					console.error(
@@ -113,6 +125,7 @@ const ListadoCursos = ({ nuevoCurso }) => {
 								title="Crear curso nuevo"
 								onClick={() => {
 									nuevoCurso({});
+
 								}}
 							>
 								add_circle
