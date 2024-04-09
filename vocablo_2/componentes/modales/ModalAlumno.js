@@ -23,6 +23,7 @@ const ModalAlumno = ({
   const [id, setId] = useState("");
   const [cursos, setCursos] = useState([]);
   const [grupos, setGrupos] = useState([]);
+  const [email, setEmail] = useState("");
 
   const [error, setError] = useState(false);
   useEffect(() => {
@@ -41,6 +42,7 @@ const ModalAlumno = ({
       setCursoAlumno(alumnoEditar.curso);
       setGrupoAlumno(alumnoEditar.grupo);
       setId(alumnoEditar.id);
+      setEmail(alumnoEditar.email);
     }
   }, []);
 
@@ -66,6 +68,7 @@ const ModalAlumno = ({
         id: alumnoEditar.id,
         fecha_creacion: fechaCreacion,
         fecha_modificacion: generarFecha(),
+        email: email,
         nombre: nombreAlumno,
         apellidos: apellidosAlumno,
         curso: cursoAlumno,
@@ -88,6 +91,8 @@ const ModalAlumno = ({
     const nuevo = {
       id: generarId(),
       fecha_creacion: generarFecha(),
+      fecha_modificacion: generarFecha(),
+      email: email,
       nombre: nombreAlumno,
       apellidos: apellidosAlumno,
       curso: cursoAlumno,
@@ -104,6 +109,7 @@ const ModalAlumno = ({
     setApellidosAlumno("");
     setCursoAlumno("");
     setGrupoAlumno("");
+    setEmail("");
   };
 
   const handleSubmit = (e) => {
@@ -131,6 +137,7 @@ const ModalAlumno = ({
           <img src="/cerrar.svg" alt="cerrar modal" onClick={ocultarModal} />
         </div>
         <form
+          autoComplete="off"
           onSubmit={handleSubmit}
           className={`${style.formulario} ${animarModal ? style.animar : style.cerrar
             }`}
@@ -152,6 +159,23 @@ const ModalAlumno = ({
               onChange={(e) => {
                 const formatearNombre = e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1);
                 setNombreAlumno(formatearNombre);
+              }}
+            />
+          </div>
+          <div className="text-center mb-3">
+            <label className="w-25" htmlFor="nombre">
+              email:
+            </label>
+            <input
+              className="w-50 p-2 estiloInput"
+              id="nombre"
+              name="email"
+              type="email"
+              placeholder="Email del Alumno"
+              value={email}
+              onChange={(e) => {
+                const valueEmail = e.target.value
+                setEmail(valueEmail);
               }}
             />
           </div>

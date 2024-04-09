@@ -23,7 +23,7 @@ const ModalAvatar = ({ seleccion, setSeleccion }) => {
             style={{ width: "12rem", margin: "auto" }}
           />
           <div>
-            <form>
+            <form autoComplete="off">
               <div className="mb-3">
                 <input
                   type="text"

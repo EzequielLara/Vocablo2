@@ -41,7 +41,7 @@ const ConfiguracionDomain = () => {
         </div>
         <main>
           <Header contenido="Configuración"></Header>
-          <form className={styles.card2}>
+          <form autoComplete="off" className={styles.card2}>
             <div className="form-row pb-3 ">
               <select
                 className="form-select mb-1"

@@ -120,7 +120,7 @@ const Formulario = ({ providers }) => {
             </div>
             <hr></hr>
           </div>
-          <form onSubmit={handleSubmit} className="w-75 m-auto p-2">
+          <form autoComplete="off" onSubmit={handleSubmit} className="w-75 m-auto p-2">
             {error && (
               <div className="alert alert-warning" role="alert">
                 {error}
@@ -184,7 +184,7 @@ const Formulario = ({ providers }) => {
       ) : (
         <>
           {" "}
-          <form className="w-75 m-auto p-2">
+          <form autoComplete="off" className="w-75 m-auto p-2">
             {error && (
               <div className="alert alert-warning" role="alert">
                 {error}

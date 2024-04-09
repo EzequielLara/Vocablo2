@@ -294,6 +294,7 @@ const Listado = ({ nuevoAlumno, cambios, setCambios }) => {
                               nuevoAlumno({
                                 id: alumno.id,
                                 nombre: alumno.nombre,
+                                email: alumno.email,
                                 apellidos: alumno.apellidos,
                                 curso: alumno.curso,
                                 grupo: alumno.grupo,
@@ -364,6 +365,7 @@ const Listado = ({ nuevoAlumno, cambios, setCambios }) => {
                               nuevoAlumno({
                                 _id: seleccionBuscador._id,
                                 nombre: seleccionBuscador.nombre,
+                                email: seleccionBuscador.email,
                                 apellidos: seleccionBuscador.apellidos,
                                 curso: seleccionBuscador.curso,
                                 grupo: seleccionBuscador.grupo,
