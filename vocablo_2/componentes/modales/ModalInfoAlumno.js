@@ -19,32 +19,32 @@ const ModalInfoAlumno = ({ alumno, salir }) => {
               <span className="input-group-text azul" id="inputGroup-sizing-default">curso</span>
 
             </div>
-            <input readOnly disabled type="text" className="form-control letra" aria-label="Default" aria-describedby="inputGroup-sizing-default" value={alumno.curso} />
+            <input autoComplete="off" readOnly disabled type="text" className="form-control letra" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="curso" value={alumno.curso} />
           </div>
           <div className="col input-group">
             <div className="input-group-prepend">
               <span className="input-group-text azul" id="inputGroup-sizing-default">grupo</span>
             </div>
-            <input readOnly disabled type="text" className="form-control letra" aria-label="Default" aria-describedby="inputGroup-sizing-default" value={alumno.grupo} />
+            <input autoComplete="off" readOnly disabled type="text" className="form-control letra" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="grupo" value={alumno.grupo} />
           </div>
         </div>
         <div className="input-group m-3">
           <div className="input-group-prepend">
             <span className="input-group-text azul" id="inputGroup-sizing-default">email</span>
           </div>
-          <input readOnly disabled type="text" className="form-control letra" aria-label="Default" aria-describedby="inputGroup-sizing-default" value={alumno.email} />
+          <input autoComplete="off" readOnly disabled type="text" className="form-control letra" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="email" value={alumno.email} />
         </div>
         <div className="input-group m-3">
           <div className="input-group-prepend">
             <span className="input-group-text azul" id="inputGroup-sizing-default">usuario creado</span>
           </div>
-          <input readOnly disabled type="text" className="form-control letra" aria-label="Default" aria-describedby="inputGroup-sizing-default" value={alumno.fecha_creacion} />
+          <input autoComplete="off" readOnly disabled type="text" className="form-control letra" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="creado" value={alumno.fecha_creacion} />
         </div>
         <div className="input-group m-3">
           <div className="input-group-prepend">
             <span className="input-group-text azul" id="inputGroup-sizing-default">última conexión</span>
           </div>
-          <input readOnly disabled type="text" className="form-control letra" aria-label="Default" aria-describedby="inputGroup-sizing-default" value={alumno.fecha_creacion} />
+          <input autoComplete="off" readOnly disabled type="text" className="form-control letra" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="conexion" value={alumno.fecha_modificacion} />
         </div>
 
 

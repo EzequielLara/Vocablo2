@@ -63,6 +63,7 @@ const ListadoCursos = ({ nuevoCurso, cambios, setCambios }) => {
           );
           setCursos(updatedCursos);
           setCambios(true);
+          fetchDatos();
 
         } else {
           console.error(
@@ -102,6 +103,15 @@ const ListadoCursos = ({ nuevoCurso, cambios, setCambios }) => {
       }
     });
   };
+
+  const contarAlumnoGrupo = (nombrecurso, nombregrupo) => {
+
+    const alumnitos = datos.alumnos;
+
+    const filtrarAlumnos = alumnitos.filter(alum => alum.curso === nombrecurso && alum.grupo === nombregrupo);
+
+    return filtrarAlumnos.length;
+  }
 
   return (
     <>
@@ -151,13 +161,16 @@ const ListadoCursos = ({ nuevoCurso, cambios, setCambios }) => {
                       <h5 className="card-title">{curso.nombreCurso}</h5>
                     </div>
                     <div className="col-4  text-center">
-                      <small className="card-subtitle text-capitalize">
+                      <small className="card-subtitle">
                         {
                           curso.grupos.map((grupo, index) => (
                             <div key={index} className="m-2">
                               <p className="card-title">
-                                <span className="card-subtitle font-weight-light colorTexto"> Grupo </span>{grupo}
+                                <span className="card-subtitle font-weight-light colorTexto  text-capitalize"> Grupo: </span>{grupo}
+                                <span className="card-subtitle font-weight-light colorTexto"> - </span><span>{contarAlumnoGrupo(curso.nombreCurso, grupo)} alumnos</span>
                               </p>
+
+
                             </div>
                           ))
                         }
@@ -198,6 +211,7 @@ const ListadoCursos = ({ nuevoCurso, cambios, setCambios }) => {
               </li>
             ))}
           </ul>
+          {console.log(contarAlumnoGrupo("Primero", "A"))}
 
         </div>
       )

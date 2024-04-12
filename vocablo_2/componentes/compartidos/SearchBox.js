@@ -14,6 +14,7 @@ const SearchBox = ({ suggestions, setSeleccion, cambiarPrimeraPagina }) => {
    * @returns {Array}
    */
   const getSuggestions = (value) => {
+    console.log('sugestion: ', suggestions)
     return suggestions.filter((suggestion) =>
       suggestion.nombre.toLowerCase().includes(value.toLowerCase())
     );
@@ -41,12 +42,13 @@ const SearchBox = ({ suggestions, setSeleccion, cambiarPrimeraPagina }) => {
     <>
       <div className="search-box-container">
         <input
-          className="input w-50"
+          className="input w-75"
           name="nombre"
           type="text"
           value={value}
           onChange={onInputChange}
           placeholder="Nombre..."
+          autoComplete="off"
         ></input>
         {filteredSuggestions.length > 0 && (
           <ul className="suggestions w-50 text-start">
@@ -68,6 +70,7 @@ const SearchBox = ({ suggestions, setSeleccion, cambiarPrimeraPagina }) => {
               Lista completa
             </li>
             {filteredSuggestions.map((suggestion, index) => (
+
               <li
                 key={index}
                 onClick={() => {

@@ -137,7 +137,6 @@ const ModalAlumno = ({
           <img src="/cerrar.svg" alt="cerrar modal" onClick={ocultarModal} />
         </div>
         <form
-          autoComplete="off"
           onSubmit={handleSubmit}
           className={`${style.formulario} ${animarModal ? style.animar : style.cerrar
             }`}
@@ -147,14 +146,15 @@ const ModalAlumno = ({
           </legend>
           <div className="text-center mb-3">
             <label className="w-25" htmlFor="nombre">
-              Nombre:
+              *Nombre:
             </label>
             <input
               className="w-50 p-2 estiloInput"
-              id="nombre"
+              autoComplete="off"
               name="nombre"
+              id="nombre"
               type="text"
-              placeholder="Nombre del Alumno"
+              placeholder="Nombre"
               value={nombreAlumno}
               onChange={(e) => {
                 const formatearNombre = e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1);
@@ -163,15 +163,16 @@ const ModalAlumno = ({
             />
           </div>
           <div className="text-center mb-3">
-            <label className="w-25" htmlFor="nombre">
+            <label className="w-25" htmlFor="email">
               email:
             </label>
             <input
               className="w-50 p-2 estiloInput"
-              id="nombre"
+              autoComplete="off"
               name="email"
+              id="email"
               type="email"
-              placeholder="Email del Alumno"
+              placeholder="Email"
               value={email}
               onChange={(e) => {
                 const valueEmail = e.target.value
@@ -181,14 +182,15 @@ const ModalAlumno = ({
           </div>
           <div className="text-center mb-3">
             <label className="w-25" htmlFor="apellidosAlumno">
-              Apellidos:
+              *Apellidos:
             </label>
             <input
               className="w-50 p-2 estiloInput"
-              id="apellidosAlumno"
+              autoComplete="off"
               name="apellidosAlumno"
+              id="apellidosAlumno"
               type="text"
-              placeholder="Apellidos del Alumno"
+              placeholder="Apellidos"
               value={apellidosAlumno}
               onChange={(e) => {
                 const formatearApellidos = e.target.value.toLowerCase()
@@ -199,11 +201,13 @@ const ModalAlumno = ({
           <div className="text-center ">
             <div className="mb-3">
               <label className="w-25" htmlFor="cursoAlumno">
-                Curso:
+                *Curso:
               </label>
               <select
                 className="w-50 p-2 estiloSelect"
+                autoComplete="off"
                 id="cursoAlumno"
+                name="cursoAlumno"
                 value={cursoAlumno}
                 onChange={(e) => {
                   setCursoAlumno(e.target.value);
@@ -221,11 +225,13 @@ const ModalAlumno = ({
 
             <div className="mb-3">
               <label className="w-25" htmlFor="grupoAlumno">
-                Grupo:
+                *Grupo:
               </label>
               <select
-                className="w-50 p-2 estiloSelect"
+                name="grupoAlumno"
                 id="grupoAlumno"
+                className="w-50 p-2 estiloSelect"
+                autoComplete="off"
                 value={grupoAlumno}
                 onChange={(e) => {
                   setGrupoAlumno(e.target.value);
@@ -240,9 +246,9 @@ const ModalAlumno = ({
               </select>
             </div>
 
-            {error && <h5 className="uno">*No se admiten campos vacíos</h5>}
+            {error && <h5 className="uno">No se admiten campos vacíos excepto email</h5>}
             <input
-              id="boton"
+              className="mb-5"
               name="boton"
               type="submit"
               value={alumnoEditar.nombre ? "Modificar Alumno" : "Añadir Alumno"}

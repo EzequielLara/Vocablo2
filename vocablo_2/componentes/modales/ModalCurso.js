@@ -59,6 +59,7 @@ const ModalCurso = ({
     const usuarioEmail = datos.email;
     const usuarioCursos = datos.cursos;
     if (nombreCursoEditar) {
+
       const filtroGrupos = grupos.filter((e) => e.trim() !== "");
       const cursoNuevo = {
         id: cursoEditar.id,
@@ -99,12 +100,22 @@ const ModalCurso = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (cursoNuevo) {
 
-    if (grupos.length == 0
-    ) {
-      setError(true);
-      return;
+      if (grupos.length == 0 || nombreCurso.trim() == "") {
+
+        setError(true);
+        return;
+      }
+    } else {
+
+      if (grupos.length == 0 || cursoEditar.nombreCurso.trim() == "") {
+
+        setError(true);
+        return;
+      }
     }
+
     setError(false);
     guardarCurso();
     ocultarModal();
@@ -141,6 +152,13 @@ const ModalCurso = ({
 
                     const nombreFormateado = e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1);
                     setNombreCurso(nombreFormateado);
+                    if (grupos.length == 0 || nombreCurso.trim() == "") {
+
+                      setError(true);
+                      return;
+                    } else {
+                      setError(false)
+                    }
                   }}
                 />
               </div>
@@ -171,13 +189,14 @@ const ModalCurso = ({
                     setGrupos([...grupos, nombreGrupo]);
                     console.log(nombreGrupo, cursoEditar.nombreCurso)
 
-                    if (nombreGrupo.trim() != '' || nombreGrupo != undefined) {
-                      setError(false);
-                      console.log('cambiado')
-                    } else {
-                      setError(true)
-                    }
                     setNombreGrupo('');
+                    if (grupos.length == 0 || nombreCurso.trim() == "") {
+
+                      setError(true);
+                      return;
+                    } else {
+                      setError(false)
+                    }
 
                   }}
                 >
@@ -207,8 +226,8 @@ const ModalCurso = ({
 
                 <input
                   className="w-50 p-1 ps-3estiloInput"
-                  id="nombre"
-                  name="nombre"
+                  id="nombreCurso"
+                  name="nombreCurso"
                   type="text"
                   value={cambiosCurso.nombreCurso}
 
@@ -226,6 +245,11 @@ const ModalCurso = ({
                       nombreCurso: nombreFormateado,
                       grupos: cursoEditar.grupos
                     })
+                    if (grupos.length == 0 || cursoEditar.nombreCurso.trim() == "") {
+
+                      setError(true);
+                      return;
+                    }
 
                     setNombreCursoEditar(nombreFormateado);
                     setCursoNuevo(false)
@@ -239,8 +263,8 @@ const ModalCurso = ({
                     <div key={index} className="text-center mb-2">
                       <input
                         className="w-50 p-1 ps-3 estiloInput"
-                        id="grupo"
-                        name="grupo"
+                        id="grupoCurso"
+                        name="grupoCurso"
                         type="text"
                         value={cambiosCurso.grupos[index]}
                         onChange={(e) => {
@@ -266,8 +290,6 @@ const ModalCurso = ({
                           })
                           setGrupos(sinVacios)
                           setCursoNuevo(false)
-
-
                         }}
                       />
                     </div>
@@ -332,7 +354,6 @@ const ModalCurso = ({
             name="boton"
             type="submit"
             value={cursoNuevo ? "Añadir Curso" : "Modificar Curso"}
-
           />
         </form>
       </div>
@@ -376,8 +397,7 @@ const ModalCurso = ({
 					 cursor: none;
 					  pointer-events: none;
 					  user-select: none;
-				 }
-									
+				 }						
             
 		`}</style>
       <link

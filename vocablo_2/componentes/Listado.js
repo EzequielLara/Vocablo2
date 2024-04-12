@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import SearchBox from "./compartidos/SearchBox";
+import SearchBoxCurso from "./compartidos/SearchBoxCurso";
 import Spinner from "../componentes/compartidos/Spinner";
 import { Suspense } from "react";
 import { Usuario } from "../contexts/contextUsuario";
 import { useContext } from "react";
 import Link from "next/link";
-
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { generarFecha } from "../shared/generarFecha";
 
 const MySwal = withReactContent(Swal);
 
@@ -24,10 +25,21 @@ const Listado = ({ nuevoAlumno, cambios, setCambios }) => {
   const [datosPaginados, setDatosPaginados] = useState([]);
   const [seleccionBuscador, setSeleccionBuscador] = useState(null);
 
-
+  const [alumnosFiltradosCursoGrupo, setAlumnosFiltradosCursoGrupo] = useState('');
+  const [filtrarPorNombre, setFiltrarPorNombre] = useState(false)
   useEffect(() => {
     setLoading(true);
+
   }, []);
+  useEffect(() => {
+    console.log('alumnos filtrados por curso y grupo: ', alumnosFiltradosCursoGrupo)
+    if (alumnosFiltradosCursoGrupo && alumnosFiltradosCursoGrupo.length > 0) {
+      setDatosPaginados(alumnosFiltradosCursoGrupo)
+    } else {
+      setDatosPaginados(alumnos)
+    }
+  }, [alumnosFiltradosCursoGrupo, setAlumnosFiltradosCursoGrupo]);
+
 
   useEffect(() => {
     if (cambios) {
@@ -106,7 +118,11 @@ const Listado = ({ nuevoAlumno, cambios, setCambios }) => {
             (alumno) => alumno.id !== alumnoid
           );
           setAlumnos(updatedAlumnos);
+          setSeleccionBuscador(null)
           setCambios(true);
+          fetchDatos()
+
+
         } else {
           console.error(
             "Error al realizar la solicitud de borrado:",
@@ -137,6 +153,7 @@ const Listado = ({ nuevoAlumno, cambios, setCambios }) => {
           text: "Alumno eliminado",
           icon: "success",
         });
+
       } else if (result.isDenied) {
         Swal.fire({
           text: "Opción de eliminar alumno descartada",
@@ -145,58 +162,21 @@ const Listado = ({ nuevoAlumno, cambios, setCambios }) => {
       }
     });
   };
-  const eliminarAlumnoBuscador = (alumnoid) => {
-    const fetchEliminarAlumno = async () => {
-      try {
-        const response = await fetch(
-          `/api/alumnos?usuarioEmail=${datos.email}&alumnoId=${alumnoid}`,
-          {
-            method: "DELETE",
-          }
-        );
-        if (response.ok) {
-          Swal.fire({
-            text: "¿Desea eliminar al alumno?",
-            icon: "info",
-            showDenyButton: true,
-            showCancelButton: false,
-            confirmButtonText: "Yes",
-            denyButtonText: "No",
-            customClass: {
-              actions: "my-actions",
-              cancelButton: "order-1 right-gap",
-              confirmButton: "order-2",
-              denyButton: "order-3",
-            },
-          }).then((result) => {
-            if (result.isConfirmed) {
-              fetchEliminarAlumno();
-              Swal.fire({
-                text: "Alumno eliminado",
-                icon: "success",
-              });
-              setTimeout(() => {
-                window.location.reload();
-              }, 1000);
-            } else if (result.isDenied) {
-              Swal.fire({
-                text: "Opción de eliminar alumno descartada",
-                icon: "error",
-              });
-            }
-          });
-        } else {
-          console.error(
-            "Error al realizar la solicitud de borrado:",
-            response.status
-          );
-        }
-      } catch (error) {
-        console.error("Error al realizar la solicitud de borrado:", error);
+  const encontrarCoincidenciaCursoGrupo = (alumnoCurso, alumnoGrupo) => {
+
+    let cursoEncontrado = datos.cursos.find(cur => cur.nombreCurso == alumnoCurso);
+
+    if (cursoEncontrado == undefined) {
+      return false
+    } else {
+      if (cursoEncontrado.grupos.includes(alumnoGrupo)) {
+
+        return true
       }
-    };
-    fetchEliminarAlumno();
-  };
+      return false
+    }
+
+  }
 
   return (
     <>
@@ -224,10 +204,10 @@ const Listado = ({ nuevoAlumno, cambios, setCambios }) => {
       ) : (
         <div className="container w-auto mt-5">
           <div className="row justify-content-center align-items-center ">
-            <div className="col-4 ">
+            <div className="col-3 ">
               <h4 className="colorTexto">Alumnos {alumnos.length > 0 ? alumnos.length : ''}</h4>
             </div>
-            <div className="col-1 text-center">
+            <div className="col-1 text-start">
               <span
                 className="material-icons colorIcono"
                 data-toggle="tooltip"
@@ -240,12 +220,26 @@ const Listado = ({ nuevoAlumno, cambios, setCambios }) => {
                 person_add
               </span>
             </div>
-            <div className="col-7 text-end">
-              <SearchBox
-                suggestions={alumnos}
-                setSeleccion={setSeleccion}
-                cambiarPrimeraPagina={cambiarPrimeraPagina}
-              ></SearchBox>
+            <div className="col-3 ps-5 form-check">
+              <input className="form-check-input" type="checkbox" value={filtrarPorNombre} id="flexCheckDefault" onChange={() => setFiltrarPorNombre(!filtrarPorNombre)} />
+              <label className="form-check-label" for="flexCheckDefault">
+                Filtrar por nombre
+              </label>
+            </div>
+            <div className="col-5 text-end">
+              {!filtrarPorNombre ? (
+                <SearchBoxCurso
+                  datos={datos}
+                  setAlumnosFiltradosCursoGrupo={setAlumnosFiltradosCursoGrupo}>
+                </SearchBoxCurso>
+              ) : (
+                <SearchBox
+                  suggestions={alumnos}
+                  setSeleccion={setSeleccion}
+                  cambiarPrimeraPagina={cambiarPrimeraPagina}
+                ></SearchBox>
+              )
+              }
             </div>
           </div>
           <hr className="pb-4"></hr>
@@ -258,17 +252,18 @@ const Listado = ({ nuevoAlumno, cambios, setCambios }) => {
                   className="list-group-item m-2 shadow-sm rounded lihover"
                   key={alumno.id}
                 >
-                  <div className="card-body">
+                  <div className='card-body'>
                     <div className="row justify-content-center align-items-center ">
                       <div className="col-4  ps-4">
-                        <h5 className="card-title">{alumno.nombre}</h5>
+                        <h5 className={encontrarCoincidenciaCursoGrupo(alumno.curso, alumno.grupo) ? "card-title" : "warning"}>{alumno.nombre}</h5>
+
                         <p className="card-subtitle font-weight-light colorTexto">
                           {alumno.apellidos}
                         </p>
                       </div>
                       <div className="col-4  text-center">
                         <small className="card-subtitle text-capitalize">
-                          {alumno.curso} - {alumno.grupo}
+                          <span className={encontrarCoincidenciaCursoGrupo(alumno.curso, alumno.grupo) ? "colorTexto" : "warning"}> {encontrarCoincidenciaCursoGrupo(alumno.curso, alumno.grupo) ? alumno.curso : "*asignar curso nuevo"}</span>{encontrarCoincidenciaCursoGrupo(alumno.curso, alumno.grupo) ? "-" + alumno.grupo : ""}
                         </small>
                       </div>
                       <div className="col-4">
@@ -299,6 +294,7 @@ const Listado = ({ nuevoAlumno, cambios, setCambios }) => {
                                 curso: alumno.curso,
                                 grupo: alumno.grupo,
                                 fecha_creacion: alumno.fecha_creacion,
+                                fecha_modificacion: generarFecha(),
                               });
                             }}
                           >
@@ -363,12 +359,16 @@ const Listado = ({ nuevoAlumno, cambios, setCambios }) => {
                             title="Editar cambios en alumno"
                             onClick={() => {
                               nuevoAlumno({
-                                _id: seleccionBuscador._id,
+                                id: seleccionBuscador.id,
                                 nombre: seleccionBuscador.nombre,
                                 email: seleccionBuscador.email,
                                 apellidos: seleccionBuscador.apellidos,
                                 curso: seleccionBuscador.curso,
                                 grupo: seleccionBuscador.grupo,
+                                fecha_creacion: seleccionBuscador.fecha_creacion,
+                                fecha_modificacion: generarFecha(),
+
+
                               });
                             }}
                           >
@@ -381,7 +381,7 @@ const Listado = ({ nuevoAlumno, cambios, setCambios }) => {
                             data-placement="top"
                             title="Eliminar alumno"
                             onClick={() => {
-                              eliminarAlumnoBuscador(seleccionBuscador.id);
+                              eliminarAlumno(seleccionBuscador.id);
                             }}
                           >
                             delete
@@ -401,7 +401,7 @@ const Listado = ({ nuevoAlumno, cambios, setCambios }) => {
             </div>
           )}
           {alumnos && (
-            <div className="mt-4 ps-4">
+            <div className="mt-4 ps-4 pb-5 mb-5">
               <div className="row">
                 <div className="col-6">
                   Ver
@@ -456,6 +456,9 @@ const Listado = ({ nuevoAlumno, cambios, setCambios }) => {
         </div >
       )}
       <style>{`
+            .warning{
+              color: tomato;
+            }
          
             .lihover:hover{
               background-color: #247c8c5e;
