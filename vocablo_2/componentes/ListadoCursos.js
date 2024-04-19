@@ -18,11 +18,12 @@ const ListadoCursos = ({ nuevoCurso, cambios, setCambios }) => {
   useEffect(() => {
     setLoading(true);
     if (datos.cursos) {
-
+      console.log('datooos', datos)
       setDatos(datos);
       setCursos(datos.cursos);
       setLoading(false);
     } else {
+      console.log('haciendo fetchdatos')
       fetchDatos()
     }
 
@@ -108,9 +109,12 @@ const ListadoCursos = ({ nuevoCurso, cambios, setCambios }) => {
 
     const alumnitos = datos.alumnos;
 
-    const filtrarAlumnos = alumnitos.filter(alum => alum.curso === nombrecurso && alum.grupo === nombregrupo);
+    if (alumnitos) {
 
-    return filtrarAlumnos.length;
+      const filtrarAlumnos = alumnitos.filter(alum => alum.curso === nombrecurso && alum.grupo === nombregrupo);
+      return filtrarAlumnos.length;
+    }
+    return 0
   }
 
   return (

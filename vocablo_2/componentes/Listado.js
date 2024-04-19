@@ -222,7 +222,7 @@ const Listado = ({ nuevoAlumno, cambios, setCambios }) => {
             </div>
             <div className="col-3 ps-5 form-check">
               <input className="form-check-input" type="checkbox" value={filtrarPorNombre} id="flexCheckDefault" onChange={() => setFiltrarPorNombre(!filtrarPorNombre)} />
-              <label className="form-check-label" for="flexCheckDefault">
+              <label className="form-check-label" htmlFor="flexCheckDefault">
                 Filtrar por nombre
               </label>
             </div>

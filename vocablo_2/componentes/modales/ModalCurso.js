@@ -150,15 +150,9 @@ const ModalCurso = ({
                   value={cursoEditar.nombreCurso}
                   onChange={(e) => {
 
-                    const nombreFormateado = e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1);
+                    const nombreFormateado = e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1).toLowerCase();
                     setNombreCurso(nombreFormateado);
-                    if (grupos.length == 0 || nombreCurso.trim() == "") {
 
-                      setError(true);
-                      return;
-                    } else {
-                      setError(false)
-                    }
                   }}
                 />
               </div>
@@ -172,7 +166,7 @@ const ModalCurso = ({
                   value={nombreGrupo}
 
                   onChange={(e) => {
-                    const nombreFormateado = e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1);
+                    const nombreFormateado = e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1).toLowerCase();
                     setNombreGrupo(nombreFormateado);
                   }}
                 />
@@ -187,16 +181,8 @@ const ModalCurso = ({
                   title="Crear curso nuevo"
                   onClick={() => {
                     setGrupos([...grupos, nombreGrupo]);
-                    console.log(nombreGrupo, cursoEditar.nombreCurso)
 
                     setNombreGrupo('');
-                    if (grupos.length == 0 || nombreCurso.trim() == "") {
-
-                      setError(true);
-                      return;
-                    } else {
-                      setError(false)
-                    }
 
                   }}
                 >
@@ -232,8 +218,8 @@ const ModalCurso = ({
                   value={cambiosCurso.nombreCurso}
 
                   onChange={(e) => {
-                    const nombreFormateado = e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1);
-                    console.log(e.target.value);
+                    const nombreFormateado = e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1).toLowerCase();
+
                     setCambioCurso({
                       id: cursoEditar.id,
                       nombreCurso: nombreFormateado,
@@ -245,11 +231,7 @@ const ModalCurso = ({
                       nombreCurso: nombreFormateado,
                       grupos: cursoEditar.grupos
                     })
-                    if (grupos.length == 0 || cursoEditar.nombreCurso.trim() == "") {
 
-                      setError(true);
-                      return;
-                    }
 
                     setNombreCursoEditar(nombreFormateado);
                     setCursoNuevo(false)
@@ -269,7 +251,7 @@ const ModalCurso = ({
                         value={cambiosCurso.grupos[index]}
                         onChange={(e) => {
 
-                          const nombreFormateado = e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1);
+                          const nombreFormateado = e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1).toLocaleLowerCase();
                           const indice1 = index;
                           const arrayModificado = cursoEditar.grupos.map((elemento, indice) => {
                             if (indice === indice1) {
@@ -306,7 +288,7 @@ const ModalCurso = ({
                   placeholder="Nombre del grupo nuevo"
                   value={nombreGrupo}
                   onChange={(e) => {
-                    const nombreFormateado = e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1);
+                    const nombreFormateado = e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1).toLowerCase();
                     setNombreGrupo(nombreFormateado);
 
                   }}
@@ -331,13 +313,7 @@ const ModalCurso = ({
                     })
 
                     setNombreGrupo('');
-                    console.log(grupos.length, nombreCursoEditar)
-                    if ((nombreGrupo != '' || nombreGrupo != undefined) && cambiosCurso.nombreCurso.trim() != '') {
-                      setError(false);
-                      console.log('cambiado')
-                    } else {
-                      setError(true)
-                    }
+
 
                   }}
                 >

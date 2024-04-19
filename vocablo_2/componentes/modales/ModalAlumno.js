@@ -157,7 +157,7 @@ const ModalAlumno = ({
               placeholder="Nombre"
               value={nombreAlumno}
               onChange={(e) => {
-                const formatearNombre = e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1);
+                const formatearNombre = e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1).toLocaleLowerCase();
                 setNombreAlumno(formatearNombre);
               }}
             />
@@ -175,7 +175,7 @@ const ModalAlumno = ({
               placeholder="Email"
               value={email}
               onChange={(e) => {
-                const valueEmail = e.target.value
+                const valueEmail = e.target.value.toLowerCase()
                 setEmail(valueEmail);
               }}
             />

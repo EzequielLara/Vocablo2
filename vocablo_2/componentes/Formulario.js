@@ -175,6 +175,7 @@ const Formulario = ({ providers }) => {
                   });
                 }
                 setIniciarSesion(!iniciarSesion);
+                setError(null)
               }}
             >
               {iniciarSesion ? "* Iniciar Sesión" : "* Registrarme"}
@@ -246,6 +247,8 @@ const Formulario = ({ providers }) => {
               className={styles.boton_registro}
               onClick={() => {
                 setIniciarSesion(!iniciarSesion);
+                setError(null)
+
               }}
             >
               {iniciarSesion ? "* Iniciar Sesión" : "* Registrarme"}

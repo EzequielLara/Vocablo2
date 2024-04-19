@@ -69,9 +69,11 @@ const SearchBoxCurso = ({ datos, setAlumnosFiltradosCursoGrupo }) => {
               setValueCurso(e.target.value);
               obtenerGruposPorCurso(datos, e.target.value);
               setCursoSeleccionado(e.target.value);
+              setValueCurso("Grupo")
               if (e.target.value == "Lista completa") {
                 setAlumnosFiltradosCursoGrupo([])
                 setValueCurso("Curso")
+                setValueCurso("Grupo")
               }
             }}
           >

@@ -5,7 +5,7 @@ import ModalCurso from "../../componentes/modales/ModalCurso";
 
 import { useContext, useEffect, useState } from "react";
 import { Usuario } from "../../contexts/contextUsuario";
-import { useRouter } from "next/router";
+import Swal from "sweetalert2";
 
 const Grupos = () => {
   const { datos, setDatos } = useContext(Usuario);
@@ -15,10 +15,41 @@ const Grupos = () => {
   const [cursoEditar, setCursoEditar] = useState({});
   const [cambios, setCambios] = useState(false)
 
+
   const nuevoCurso = (curso) => {
-    setCursoEditar(curso);
-    setModal(!modal);
-    setCambios(true);
+    if (!curso.nombreCurso) {
+      setCursoEditar(curso);
+      setModal(!modal);
+      setCambios(true);
+    } else {
+      Swal.fire({
+        text: `¿Desea modificar el curso?.Recuerde que puede haber alumnos asociados a ellos y que deberán ser reasignados posteriormente en la pestaña "alumnos"`,
+        icon: "info",
+        showDenyButton: true,
+        showCancelButton: false,
+        confirmButtonText: "Yes",
+        denyButtonText: "No",
+        customClass: {
+          actions: "my-actions",
+          cancelButton: "order-1 right-gap",
+          confirmButton: "order-2",
+          denyButton: "order-3",
+        },
+      }).then((result) => {
+        if (result.isConfirmed) {
+          setCursoEditar(curso);
+          setModal(!modal);
+          setCambios(true);
+
+        } else if (result.isDenied) {
+          Swal.fire({
+            text: "Opción de modificar el curso descartada",
+            icon: "error",
+          });
+        }
+      });
+    }
+
   };
 
   const cambiarModal = () => {
