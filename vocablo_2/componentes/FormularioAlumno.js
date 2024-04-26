@@ -18,20 +18,22 @@ const FormularioAlumno = () => {
 
   const router = useRouter();
 
-  const handleChange = (e) => {
+  const handleChange = ({ target }) => {
+    const { name, value } = target
     setDatosUsuarioSesion({
       ...datosUsuarioSesion,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(false);
     await axios
-      .post("/api/auth/login", datosUsuarioSesion)
+      .post("/api/auth/loginalumos", datosUsuarioSesion)
       .catch((e) => setError(e.response.data.error));
 
-    router.push("/docentes");
+    router.push("/alumnos");
   };
 
   return (
@@ -70,7 +72,7 @@ const FormularioAlumno = () => {
               aria-describedby="emailHelp"
               placeholder="Enter email"
               onChange={handleChange}
-              autoComplete="true"
+              autoComplete="off"
               required
             />
           </div>
@@ -83,10 +85,17 @@ const FormularioAlumno = () => {
               id="password"
               placeholder="Password"
               onChange={handleChange}
-              autoComplete="true"
+              autoComplete="off"
               required
             />
+            <div className="w-100 m-auto text-center text-decoration-none p-2">
+              <Link href={"/alumno/restaurar"} >
+                <a><small>He olvidado la contraseña</small></a>
+              </Link>
+
+            </div>
           </div>
+
 
           <div className="d-flex justify-content-center p-4">
             <button
@@ -113,5 +122,7 @@ const FormularioAlumno = () => {
     </>
   )
 };
+
+
 
 export default FormularioAlumno;

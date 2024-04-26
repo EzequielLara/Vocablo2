@@ -65,6 +65,7 @@ const ModalAlumno = ({
     const usuario = datos;
     if (alumnoEditar.id) {
       const alumnoNuevo = {
+
         id: alumnoEditar.id,
         fecha_creacion: fechaCreacion,
         fecha_modificacion: generarFecha(),
@@ -73,6 +74,7 @@ const ModalAlumno = ({
         apellidos: apellidosAlumno,
         curso: cursoAlumno,
         grupo: grupoAlumno,
+
       };
 
       //Actualizar
@@ -90,6 +92,7 @@ const ModalAlumno = ({
     //Nuevo
     const nuevo = {
       id: generarId(),
+      password: '12345',
       fecha_creacion: generarFecha(),
       fecha_modificacion: generarFecha(),
       email: email,
@@ -97,6 +100,7 @@ const ModalAlumno = ({
       apellidos: apellidosAlumno,
       curso: cursoAlumno,
       grupo: grupoAlumno,
+      activado: true
     };
 
     await axios

@@ -23,7 +23,7 @@ const Grupos = () => {
       setCambios(true);
     } else {
       Swal.fire({
-        text: `¿Desea modificar el curso?.Recuerde que puede haber alumnos asociados a ellos y que deberán ser reasignados posteriormente en la pestaña "alumnos"`,
+        text: `¿Desea modificar el curso?.Recuerde que puede haber alumnos asociados a ellos y que deberán ser reasignados posteriormente desde la pestaña "alumnos"`,
         icon: "info",
         showDenyButton: true,
         showCancelButton: false,
