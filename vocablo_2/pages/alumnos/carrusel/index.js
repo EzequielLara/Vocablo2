@@ -1,10 +1,10 @@
-import Layout from "../../componentes/layouts/Layout";
+import Layout from "../../../componentes/layouts/Layout";
 import Link from "next/link";
-import Header from "../../componentes/compartidos/Header";
-import styles from "../../styles/Home.module.css";
+import Header from "../../../componentes/compartidos/Header";
+import styles from "../../../styles/Home.module.css";
 import { useEffect, useState } from "react";
 
-import { Configuracion } from "../../contexts/context";
+import { Configuracion } from "../../../contexts/context";
 import { useContext } from "react";
 
 const ConfiguracionDomain = () => {
@@ -104,7 +104,7 @@ const ConfiguracionDomain = () => {
               </div>
             </div>
             <Link href={"carrusel/app/"}>
-              <button className="btn btn-primary mt-4 w-100" type="submit">
+              <button className="btn btn-outline-success mt-4 w-100" type="submit">
                 Aceptar
               </button>
             </Link>

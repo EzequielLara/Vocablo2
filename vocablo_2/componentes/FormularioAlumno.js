@@ -29,11 +29,17 @@ const FormularioAlumno = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(false);
-    await axios
+    const alumnoValido = await axios
       .post("/api/auth/loginalumos", datosUsuarioSesion)
       .catch((e) => setError(e.response.data.error));
+    if (alumnoValido && alumnoValido.status === 200) {
 
-    router.push("/alumnos");
+      router.push("/alumnos");
+    } else {
+      router.push("/loginAlumnos");
+
+    }
+
   };
 
   return (

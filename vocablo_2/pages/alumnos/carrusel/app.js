@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { Configuracion } from "../../contexts/context";
+import { Configuracion } from "../../../contexts/context";
 import { useContext } from "react";
 
 const AppDomain = () => {

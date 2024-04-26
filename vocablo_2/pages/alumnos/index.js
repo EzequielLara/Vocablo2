@@ -1,14 +1,55 @@
-import FormularioAlumno from '../../componentes/FormularioAlumno'
+import Layout from "../../componentes/layouts/Layout";
+import Link from "next/link";
+import TarjetasLink from "../../componentes/compartidos/TarjetasLink";
+import styles from "../../styles/Home.module.css";
 
-const LoginAlumnos = () => {
+const Home = () => {
   return (
-    <div className=" row my-5">
-      <div className="col col-md-6 col-lg-4 m-auto">
-        <div className="card shadow-lg rounded">
-          <FormularioAlumno></FormularioAlumno>
+    <>
+      <Layout title="alumnos" className="container">
+        <div className="imgvocablo">
+          <Link href={"/"}>
+            <a>
+              <img alt="Logo vocablo" src="/logo_vocablo_700.png" width="200" />
+            </a>
+          </Link>
         </div>
-      </div>
-    </div>
-  )
-}
-export default LoginAlumnos;
+        <main className={styles.main}>
+          <div className={styles.grid}>
+            <TarjetasLink
+              href="/alumnos/carrusel"
+              titulo="Carrusel"
+              parrafo="Configura las opciones y comienza a mostrar tus palabras "
+            />
+            <TarjetasLink
+              href="/metodologias"
+              titulo="Metodologías"
+              parrafo="Accede al amplio catálogo de metodologías disponibles"
+            />
+          </div>
+        </main>
+      </Layout>
+      <style>{`
+          .title{
+            margin-bottom:60px;
+            color:#247c8c;
+          }
+          @media (max-width:440px){
+            .imgvocablo{
+              width:100%;
+              text-align:center;
+              margin-top:15px;
+            }
+            .title{
+              width:100%;
+              text-align:center;
+              margin-top:0px;
+            }
+          }
+       
+       `}</style>
+    </>
+  );
+};
+
+export default Home;
