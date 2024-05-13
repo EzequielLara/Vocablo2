@@ -64,7 +64,7 @@ export default async function loginalumnos(req, res) {
             },
             process.env.SECRET_JWT
           );
-          const serialized = serialize("tokenNameAlumno", token, {
+          const serialized = serialize("myTokenName", token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
             sameSite: "strict",

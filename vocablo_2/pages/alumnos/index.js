@@ -23,8 +23,8 @@ const Home = () => {
             />
             <TarjetasLink
               href="/metodologias"
-              titulo="Metodologías"
-              parrafo="Accede al amplio catálogo de metodologías disponibles"
+              titulo="Metodología"
+              parrafo="Accede a la información sobre la aplición de la metodología Doman"
             />
           </div>
         </main>

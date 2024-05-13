@@ -18,7 +18,7 @@ const ListadoCursos = ({ nuevoCurso, cambios, setCambios }) => {
   useEffect(() => {
     setLoading(true);
     if (datos.cursos) {
-      console.log('datooos', datos)
+      console.log('datooos', datos.cursos)
       setDatos(datos);
       setCursos(datos.cursos);
       setLoading(false);

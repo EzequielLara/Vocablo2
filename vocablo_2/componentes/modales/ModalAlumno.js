@@ -91,6 +91,7 @@ const ModalAlumno = ({
     }
     //Nuevo
     const nuevo = {
+      perfil: "alumno",
       id: generarId(),
       password: '12345',
       fecha_creacion: generarFecha(),

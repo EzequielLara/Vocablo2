@@ -25,7 +25,7 @@ export default async function alumnos(req, res) {
           email: req.query.email,
         });
         if (usuarios === undefined || usuarios === null) {
-          res.status(500).json({ error: "No se ha recibido ningún usuario en el servidor" });
+          res.status(404).json({ error: "No se ha recibido ningún usuario en el servidor" });
         }
         const datosfiltrados = filtrarDatos(usuarios);
         res.status(200).json(datosfiltrados);
@@ -37,14 +37,12 @@ export default async function alumnos(req, res) {
         const alumnoIntroducido = await collection.updateOne(
           { email: usuario.email },
           { $push: { alumnos: nuevo } },
-          (err) => {
-            if (err) {
-              res.status(500).send("Error al insertar el alumno");
-            } else {
-              res.status(200).json(alumnoIntroducido);
-            }
-          }
         );
+        if (alumnoIntroducido.modifiedCount === 1) {
+          res.status(200).json(alumnoIntroducido);
+        } else {
+          res.status(404).send("Error al insertar el alumno");
+        }
         break;
       case "PUT":
 

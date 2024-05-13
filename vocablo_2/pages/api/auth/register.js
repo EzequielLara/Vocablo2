@@ -25,7 +25,7 @@ export default async function loginHandler(req, res) {
         const collection = db.collection("usuarios");
         switch (req.method) {
           case "POST":
-            const { email, username, password } = req.body;
+            const { email, username, password, perfil } = req.body;
             const passwordhaseado = hashPassword(password);
             const usuarioExistente = await collection.findOne({ email });
             if (usuarioExistente) {
@@ -35,6 +35,7 @@ export default async function loginHandler(req, res) {
               return;
             }
             await collection.insertOne({
+              perfil: "docente",
               fechaCreacion: generarFecha(),
               ultimoAcceso: new Date().toLocaleString(),
               email,

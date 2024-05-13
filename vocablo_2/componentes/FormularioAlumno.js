@@ -9,7 +9,7 @@ const FormularioAlumno = () => {
 
   const [datosUsuarioSesion, setDatosUsuarioSesion] = useState({
     email: "",
-    password: "",
+    password: ""
 
   });
 

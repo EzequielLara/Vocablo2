@@ -12,12 +12,16 @@ const Formulario = ({ providers }) => {
     email: "",
     password: "",
     loginAuth: false,
+
+
   });
   const [datosUsuarioRegistro, setDatosUsuarioRegistro] = useState({
     email: "",
     username: "",
     password: "",
     loginAuth: false,
+
+
   });
 
   // Estados para controlar cual de los dos formularios se mostrará
@@ -32,6 +36,7 @@ const Formulario = ({ providers }) => {
     setDatosUsuarioSesion({
       ...datosUsuarioSesion,
       [e.target.name]: e.target.value,
+
     });
   };
   const handleChangeRegister = (e) => {

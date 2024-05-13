@@ -25,7 +25,7 @@ export default function Principal() {
           </p>
           <div className={styles.grid}>
             <TarjetasLink
-              href="/alumnos"
+              href="/loginAlumnos"
               titulo="Alumno"
               parrafo="Solicita tus credenciales a tu profesor para acceder a los recursos "
             />

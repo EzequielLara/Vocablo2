@@ -7,6 +7,7 @@ export default function logout(req, res) {
   if (!myTokenName) {
     return res.status(401).json({ error: "no token" });
   }
+
   try {
     verify(myTokenName, process.env.SECRET_JWT);
     const serialized = serialize("myTokenName", null, {
@@ -18,8 +19,11 @@ export default function logout(req, res) {
       path: "/",
     });
     res.setHeader("Set-Cookie", serialized);
-    return res.status(200).json({ exito: "logout satisfactorio" });
+
   } catch {
     return res.status(401).json("no se ha podido realizar la operación");
   }
+
+  return res.status(200).json({ exito: "logout satisfactorio" });
+
 }
