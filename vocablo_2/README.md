@@ -20,7 +20,7 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 
 ## Sobre la aplicación
 
-Proyecto final de curso presentado para el ciclo formativo de grado superior de Desarrollo de Aplicaciones Web. Curso 2023-2024
+Proyecto final de curso presentado para el ciclo formativo de grado superior de Desarrollo de Aplicaciones Web. Curso 2024-2025
 
 Herramienta educativa para el apoyo de los docentes en la enseñanza del aprendizaje de la lectura.
 
